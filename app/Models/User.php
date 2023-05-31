@@ -12,11 +12,11 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
 
-    public function contacts(): HasMany
+    public function contact(): HasMany
     {
         return $this->hasMany(Contact::class);
     }
-    
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

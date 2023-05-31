@@ -14,7 +14,6 @@ class ContactController extends Controller
      */
     public function index() : View
     {
-        return view('contacts.index');
         return view('contacts.index', [
             'contacts' => Contact::with('user')->latest()->get(),
         ]);
@@ -37,14 +36,13 @@ class ContactController extends Controller
             'name' => 'required|string|max:128',
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
-            'description' => 'required|string|max:255',
-
+            'description' => 'nullable|string',
         ]);
 
         $contact = Contact::create($validated);
         $contact-> save();
 
-        return redirect(route('contact.index'));
+        return redirect(route('contacts.index'));
     }
 
     /**
