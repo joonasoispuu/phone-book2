@@ -56,17 +56,29 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact): View
     {
-        //
+        //$this->authorize('update', $contact);
+
+        return view('contacts.edit', [
+            'contact' => $contact,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact): RedirectResponse
     {
-        //
+        $this->authorize('update', $contact);
+
+        $validated = $request->validate([
+            'description' => 'required|string|max:255',
+        ]);
+
+        $contact->update($validated);
+
+        return redirect(route('contacts.index'));
     }
 
     /**
