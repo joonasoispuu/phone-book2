@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contact extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'name' => 'required|string|max:128',
-            'ContactType' => 'required|string|max:30',
-            'ContactValue' => 'required|string|max:30',
-            'description' => 'required|string|max:255',
+        'name',
+        'ContactType',
+        'ContactValue',
+        'description',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

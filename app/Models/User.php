@@ -12,10 +12,11 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
 
-    public function contacts(): HasMany
+    public function contact(): HasMany
     {
         return $this->hasMany(Contact::class);
     }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -28,6 +29,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -37,6 +39,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
     /**
      * The attributes that should be cast.
      *

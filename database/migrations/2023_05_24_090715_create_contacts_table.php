@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',128);
             $table->string('ContactType',30);
             $table->string('ContactValue',30);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
