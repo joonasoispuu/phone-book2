@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,9 +13,10 @@ class ContactController extends Controller
      */
     public function index() : View
     {
-        return View("contact.index");
+        return View("contacts.index",[
+            'contacts' => Contact::all(),
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -23,13 +24,23 @@ class ContactController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:128',
+            'ContactType' => 'required|string|max:30',
+            'ContactValue' => 'required|string|max:30',
+            'description' => 'required|string|max:255',
+
+        ]);
+
+        $contact = Contact::create($validated);
+        $contact-> save();
+
+        return redirect(route('contact.index'));
     }
 
     /**
@@ -39,7 +50,6 @@ class ContactController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -47,7 +57,6 @@ class ContactController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -55,7 +64,6 @@ class ContactController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      */
