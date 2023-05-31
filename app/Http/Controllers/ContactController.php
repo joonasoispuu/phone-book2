@@ -39,7 +39,7 @@ class ContactController extends Controller
         $contact = Contact::create($validated);
         $contact-> save();
 
-        return redirect(route('contact.index'));
+        return redirect(route('contacts.index'));
     }
 
     /**
