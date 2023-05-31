@@ -16,7 +16,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contact::class);
     }
-
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

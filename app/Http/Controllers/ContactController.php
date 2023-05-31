@@ -34,7 +34,6 @@ class ContactController extends Controller
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
             'description' => 'required|string|max:255',
-            
         ]);
 
         $contact = Contact::create($validated);
