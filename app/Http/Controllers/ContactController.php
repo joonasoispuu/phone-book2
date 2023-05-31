@@ -14,7 +14,10 @@ class ContactController extends Controller
      */
     public function index() : View
     {
-        return View("contact.index");
+        return view('contacts.index');
+        return view('contacts.index', [
+            'contacts' => Contact::with('user')->latest()->get(),
+        ]);
     }
 
     /**

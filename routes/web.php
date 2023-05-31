@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('contact', ContactController::class)
+Route::resource('contacts', ContactController::class)
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
