@@ -70,11 +70,11 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact): RedirectResponse
     {
-        $this->authorize('update', $contact);
-
         $validated = $request->validate([
-            'description' => 'required|string|max:255',
-        ]);
+            'name' => 'required|string|max:128',
+            'ContactType' => 'required|string|max:30',
+            'ContactValue' => 'required|string|max:30',
+            'description' => 'nullable|string',        ]);
 
         $contact->update($validated);
 
