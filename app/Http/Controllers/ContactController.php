@@ -59,9 +59,16 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact):RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:128',
+            'ContactType' => 'required|string|max:30',
+            'ContactValue' => 'required|string|max:30',
+            'description' => 'required|string|max:255',
+        ]);
+
+        
     }
     /**
      * Remove the specified resource from storage.
