@@ -34,6 +34,7 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:128',
+            'phonenumber' => 'required|string|max:15',
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
             'description' => 'nullable|string',
@@ -72,6 +73,7 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:128',
+            'phonenumber' => 'required|string|max:15',
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
             'description' => 'nullable|string',        ]);
@@ -84,7 +86,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function delete(Contact $contact): RedirectResponse
     {
         //
     }

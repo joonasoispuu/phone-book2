@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
+            $table->datetime("groups_time");
+            $table->string("groups_Title");
+            $table->string("groups_Desc");
+            $table->unsignedBigInteger("contact_id")
+                  ->references("id")
+                  ->on("contacts");
+            $table->unsignedBigInteger("server_id")
+                ->references("id")
+                ->on("users");
             $table->timestamps();
         });
     }

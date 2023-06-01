@@ -10,9 +10,16 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
             <input type="text"
+                name="phonenumber"
+                value="{{old("phonenumber")}}"
+                placeholder="{{ __('Add your contact´s phone number') }}"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+            <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
+
+            <input type="text"
                 name="ContactType"
                 value="{{old("ContactType")}}"
-                placeholder="{{ __('Add your contact type') }}"
+                placeholder="{{ __('Add your contact type (Discord, Facebook etc)') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('ContactType')" class="mt-2" />
 
@@ -58,10 +65,13 @@
                                     <x-dropdown-link :href="route('contacts.edit', $contact)">
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
+
                                 </x-slot>
                             </x-dropdown>
                         </div>
+
                         <p class="mt-4 text-lg text-gray-900">Contact´s Name: {{ $contact->name }}</p>
+                        <p class="mt-4 text-lg text-gray-900">Contact´s Phone number: {{ $contact->phonenumber }}</p>
                         <p class="mt-4 text-lg text-gray-900">Contact´s Description: {{ $contact->description }}</p>
                         <p class="mt-4 text-lg text-gray-900"> Contact´s {{ $contact->ContactType }} is {{ $contact->ContactValue }}</p>
                     </div>

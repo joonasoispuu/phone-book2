@@ -11,6 +11,7 @@ class Contact extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        "phonenumber",
         'ContactType',
         'ContactValue',
         'description',
@@ -18,6 +19,6 @@ class Contact extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Group::class);
     }
 }

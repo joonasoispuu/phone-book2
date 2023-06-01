@@ -12,11 +12,20 @@
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </label>
 
+            <label class="text-gray-400 text-sm">Phone number
+                <input type="text"
+                        name="phonenumber"
+                        value="{{old("phonenumber")}}"
+                        placeholder="{{ __('Edit your contact´s phone number') }}"
+                        class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
+                </label>
+
             <label class="text-gray-400 text-sm">ContactType
                 <input type="text"
                     name="ContactType"
                     value="{{old("ContactType")}}"
-                    placeholder="{{ __('Edit your contact type') }}"
+                    placeholder="{{ __('Edit your contact type (Discord, Facebook etc)') }}"
                     class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 <x-input-error :messages="$errors->get('ContactType')" class="mt-2" />
             </label>
