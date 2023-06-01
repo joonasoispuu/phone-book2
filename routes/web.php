@@ -24,7 +24,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('contacts', ContactController::class)
-    ->only(["delete"])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
