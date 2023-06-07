@@ -14,9 +14,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+<<<<<<< HEAD
                     <x-responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
+=======
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
+>>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
                         {{ __('Contacts') }}
-                    </x-responsive-nav-link>
+                    </x-nav-link>
                 </div>
             </div>
             <!-- Settings Dropdown -->

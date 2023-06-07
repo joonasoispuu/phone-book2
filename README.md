@@ -1,4 +1,4 @@
-### Autorid : Joonas Õpispuu, Kristjan Georg Kessel
+### Autorid : Joonas Õpispuu, Kristjan Georg Kessel, Marcus Toman
 
 Projekti esmaseks käivitamiseks peale repo kloonimist:
 ```

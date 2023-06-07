@@ -29,12 +29,17 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:128',
+            'phonenumber' => 'required|string|max:15',
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
             'description' => 'nullable|string',
         ]);
         $contact = Contact::create($validated);
         $contact-> save();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
         return redirect(route('contacts.index'));
     }
     /**
@@ -61,11 +66,20 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact): RedirectResponse
     {
+<<<<<<< HEAD
         $this->authorize('update', $contact);
 
         $validated = $request->validate([
             'description' => 'required|string|max:255',
         ]);
+=======
+        $validated = $request->validate([
+            'name' => 'required|string|max:128',
+            'phonenumber' => 'required|string|max:15',
+            'ContactType' => 'required|string|max:30',
+            'ContactValue' => 'required|string|max:30',
+            'description' => 'nullable|string',        ]);
+>>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
 
         $contact->update($validated);
 
@@ -75,7 +89,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function delete(Contact $contact): RedirectResponse
     {
         //
     }
