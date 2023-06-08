@@ -70,12 +70,6 @@
                             {{ __('Delete') }}
                         </x-dropdown-link>
                     </form>
-                    <form method="POST" action="{{ route('groups.store-contact', $group) }}">
-                        @csrf
-                        <x-dropdown-link :href="route('groups.addContact', $group)" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Add Contact') }}
-                        </x-dropdown-link>
-                    </form>
                 </x-slot>
             </x-dropdown>
         </div>

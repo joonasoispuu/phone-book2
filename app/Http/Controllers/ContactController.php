@@ -98,4 +98,12 @@ class ContactController extends Controller
     {
         //
     }
+
+    public function destroy(Contact $contact)
+    {
+        $contact->delete(); // Delete the group
+
+        return redirect()->route('contacts.index')->with('success', 'Group deleted successfully.');
+    }
+
 }
