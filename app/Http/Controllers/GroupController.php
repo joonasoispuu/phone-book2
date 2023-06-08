@@ -74,11 +74,19 @@ class GroupController extends Controller
     public function storeContact(Request $request, Group $group)
     {
         $validatedData = $request->validate([
-            'contact_id' => 'required|exists:contacts,id',
+            'contact_id' => [
+                'required',
+                'exists:contacts,id',
+                function ($attribute, $value, $fail) use ($group) {
+                    if ($group->contacts->contains('id', $value)) {
+                        $fail('This contact is already in the group.');
+                    }
+                }
+            ],
         ]);
-
+    
         $group->contacts()->attach($validatedData['contact_id']);
-
+    
         return redirect()->route('groups.index')->with('success', 'Contact added to the group successfully.');
     }
 

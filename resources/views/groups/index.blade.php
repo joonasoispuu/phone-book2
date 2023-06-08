@@ -58,11 +58,12 @@
                     </button>
                 </x-slot>
                 <x-slot name="content">
-                    <!-- Edit link -->
+                    <x-dropdown-link :href="route('groups.add-contact', $group)">
+                        {{ __('Add Contact') }}
+                    </x-dropdown-link>
                     <x-dropdown-link :href="route('groups.edit', $group)">
                         {{ __('Edit') }}
                     </x-dropdown-link>
-                    <!-- Delete form -->
                     <form method="POST" action="{{ route('groups.destroy', $group) }}">
                         @csrf
                         @method('DELETE')

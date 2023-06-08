@@ -30,8 +30,8 @@ Route::resource('contacts', ContactController::class)
 Route::resource('groups', GroupController::class)
     ->middleware(['auth', 'verified']);
 
-Route::post('groups/{group}/add-contact', [GroupController::class, 'addContact'])
-    ->name('groups.addContact');
+Route::get('/groups/{group}/add-contact', [GroupController::class, 'addContact'])
+    ->name('groups.add-contact');
 
 Route::post('/groups/{group}/store-contact', [GroupController::class, 'storeContact'])
     ->name('groups.store-contact'); 
