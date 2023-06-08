@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,11 +25,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('contacts', ContactController::class)
-<<<<<<< HEAD
-                ->middleware(['auth', 'verified']);
-=======
     ->middleware(['auth', 'verified']);
->>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
+
+Route::resource('groups', GroupController::class)
+    ->middleware(['auth', 'verified']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

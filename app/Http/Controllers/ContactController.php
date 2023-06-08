@@ -1,20 +1,32 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Contact;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index() : View
+    public function index(Request $request) : View
     {
+        $search = $request->input('search');
+
+        $contacts = Contact::with('user')
+            ->where('name', 'LIKE', "%$search%")
+            ->orWhere('phonenumber', 'LIKE', "%$search%")
+            ->orWhere('ContactType', 'LIKE', "%$search%")
+            ->latest()
+            ->get();
+
         return view('contacts.index', [
-            'contacts' => Contact::with('user')->latest()->get(),
+            'contacts' => $contacts,
+            'search' => $search,
         ]);
     }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -22,6 +34,7 @@ class ContactController extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -34,14 +47,13 @@ class ContactController extends Controller
             'ContactValue' => 'required|string|max:30',
             'description' => 'nullable|string',
         ]);
+
         $contact = Contact::create($validated);
         $contact-> save();
-<<<<<<< HEAD
-=======
 
->>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
         return redirect(route('contacts.index'));
     }
+
     /**
      * Display the specified resource.
      */
@@ -49,6 +61,7 @@ class ContactController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -66,20 +79,12 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact): RedirectResponse
     {
-<<<<<<< HEAD
-        $this->authorize('update', $contact);
-
-        $validated = $request->validate([
-            'description' => 'required|string|max:255',
-        ]);
-=======
         $validated = $request->validate([
             'name' => 'required|string|max:128',
             'phonenumber' => 'required|string|max:15',
             'ContactType' => 'required|string|max:30',
             'ContactValue' => 'required|string|max:30',
             'description' => 'nullable|string',        ]);
->>>>>>> d86b4bfa57663e9aa4f2a4093295a22011d29c6a
 
         $contact->update($validated);
 
