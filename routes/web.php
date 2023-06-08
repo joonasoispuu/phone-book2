@@ -30,6 +30,11 @@ Route::resource('contacts', ContactController::class)
 Route::resource('groups', GroupController::class)
     ->middleware(['auth', 'verified']);
 
+Route::post('groups/{group}/add-contact', [GroupController::class, 'addContact'])
+    ->name('groups.addContact');
+
+Route::post('/groups/{group}/store-contact', [GroupController::class, 'storeContact'])
+    ->name('groups.store-contact'); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

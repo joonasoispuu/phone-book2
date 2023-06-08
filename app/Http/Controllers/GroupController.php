@@ -12,7 +12,8 @@ class GroupController extends Controller
     {
         $contacts = Contact::all();
         $groups = Group::with('contacts')->get();
-        return view('groups.index', compact('groups',"contacts"));
+        return view('groups.index', compact('groups', 'contacts'));
+
     }
 
     public function store(Request $request)
@@ -60,6 +61,26 @@ class GroupController extends Controller
             'Groups_Title' => $validatedData['Groups_Title'],
             'Groups_Desc' => $validatedData['Groups_Desc'],
         ]);
+
         return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
     }
+
+    public function addContact(Group $group)
+    {
+        $contacts = Contact::all();
+        return view('groups.add-contact', compact('group', 'contacts'));
+    }
+
+    public function storeContact(Request $request, Group $group)
+    {
+        $validatedData = $request->validate([
+            'contact_id' => 'required|exists:contacts,id',
+        ]);
+
+        $group->contacts()->attach($validatedData['contact_id']);
+
+        return redirect()->route('groups.index')->with('success', 'Contact added to the group successfully.');
+    }
+
+
 }

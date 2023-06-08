@@ -42,58 +42,59 @@
 
 
             @foreach ($groups as $group)
-
-            <div class="flex-1">
-                <div class="flex justify-between items-center">
-                    <div>
-                        @unless ($contact->created_at->eq($contact->updated_at))
-                        <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
-                    @endunless
-                    </div>
-                    <x-dropdown>
-                        <x-slot name="trigger">
-                            <button>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                </svg>
-                            </button>
-                        </x-slot>
-                        <x-slot name="content">
-                            <!-- Edit link -->
-                            <x-dropdown-link :href="route('groups.edit', $contact)">
-                                {{ __('Edit') }}
-                            </x-dropdown-link>
-                            <!-- Delete form -->
-                            <form method="POST" action="{{ route('groups.destroy', $group) }}">
-                                @csrf
-                                @method('DELETE')
-                                <x-dropdown-link :href="route('groups.destroy', $group)"
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('Delete') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-
-                    </x-dropdown>
-                </div>
+    <div class="flex-1">
+        <div class="flex justify-between items-center">
+            <div>
+                @unless ($group->created_at->eq($group->updated_at))
+                    <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
+                @endunless
             </div>
-                <div class="p-6 flex space-x-2">
-                    <div class="flex-1">
-                        <p class="mt-4 text-lg text-gray-900">Group Title: {{ $group->Groups_Title }}</p>
-                        <p class="mt-4 text-lg text-gray-900">Group Description: {{ $group->Groups_Desc }}</p>
-
-                        <h2 class="mt-4 text-lg text-gray-900">Contacts in this Group:</h2>
-                        @foreach ($group->contacts as $contact)
-                            <p class="mt-2 text-md text-gray-900">Contact's Name: {{ $contact->name }}</p>
-                            <p class="mt-2 text-md text-gray-900">Contact's Phone number: {{ $contact->phonenumber }}</p>
-                            <p class="mt-2 text-md text-gray-900">Contact's Description: {{ $contact->description }}</p>
-                            <p class="mt-2 text-md text-gray-900">Contact's {{ $contact->ContactType }} is {{ $contact->ContactValue }}</p>
-                        @endforeach
-                    </div>
-                </div>
-
-
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                        </svg>
+                    </button>
+                </x-slot>
+                <x-slot name="content">
+                    <!-- Edit link -->
+                    <x-dropdown-link :href="route('groups.edit', $group)">
+                        {{ __('Edit') }}
+                    </x-dropdown-link>
+                    <!-- Delete form -->
+                    <form method="POST" action="{{ route('groups.destroy', $group) }}">
+                        @csrf
+                        @method('DELETE')
+                        <x-dropdown-link :href="route('groups.destroy', $group)" onclick="event.preventDefault(); this.closest('form').submit();">
+                            {{ __('Delete') }}
+                        </x-dropdown-link>
+                    </form>
+                    <form method="POST" action="{{ route('groups.store-contact', $group) }}">
+                        @csrf
+                        <x-dropdown-link :href="route('groups.addContact', $group)" onclick="event.preventDefault(); this.closest('form').submit();">
+                            {{ __('Add Contact') }}
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-dropdown>
+        </div>
+    </div>
+    <div class="p-6 flex space-x-2">
+        <div class="flex-1">
+            <p class="mt-4 text-lg text-gray-900">Group Title: {{ $group->Groups_Title }}</p>
+            <p class="mt-4 text-lg text-gray-900">Group Description: {{ $group->Groups_Desc }}</p>
+            <h2 class="mt-4 text-lg text-gray-900">Contacts in this Group:</h2>
+            @foreach ($group->contacts as $contact)
+                <p class="mt-2 text-md text-gray-900">Contact's Name: {{ $contact->name }}</p>
+                <p class="mt-2 text-md text-gray-900">Contact's Phone number: {{ $contact->phonenumber }}</p>
+                <p class="mt-2 text-md text-gray-900">Contact's Description: {{ $contact->description }}</p>
+                <p class="mt-2 text-md text-gray-900">Contact's {{ $contact->ContactType }} is {{ $contact->ContactValue }}</p>
             @endforeach
+        </div>
+    </div>
+@endforeach
+
         </div>
     </div>
 </x-app-layout>
