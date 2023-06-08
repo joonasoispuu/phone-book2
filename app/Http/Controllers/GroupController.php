@@ -35,4 +35,31 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index')->with('success', 'Group created successfully.');
     }
+
+    public function destroy(Group $group)
+    {
+        $group->contacts()->detach(); // Remove all related contacts
+        $group->delete(); // Delete the group
+
+        return redirect()->route('groups.index')->with('success', 'Group deleted successfully.');
+    }
+
+    public function edit(Group $group)
+    {
+        return view('groups.edit', compact('group'));
+    }
+
+    public function update(Request $request, Group $group)
+    {
+        $validatedData = $request->validate([
+            'Groups_Title' => 'required|string|max:255',
+            'Groups_Desc' => 'nullable|string',
+        ]);
+
+        $group->update([
+            'Groups_Title' => $validatedData['Groups_Title'],
+            'Groups_Desc' => $validatedData['Groups_Desc'],
+        ]);
+        return redirect()->route('groups.index')->with('success', 'Group updated successfully.');
+    }
 }
